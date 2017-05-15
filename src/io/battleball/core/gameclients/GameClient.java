@@ -20,7 +20,8 @@ public class GameClient {
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param user
+	 *            the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
@@ -33,16 +34,18 @@ public class GameClient {
 	}
 
 	public void stop() {
-		if (user != null)
-		{
+		if (user != null) {
 			user.onDisconnect();
 		}
-		if (connection != null && connection.isOpen())
-		{
-			connection.close();
+		if (connection != null) {
+			if (connection.isOpen())
+				connection.close();
 			connection = null;
 		}
-		messageHandler = null;
+		if (messageHandler != null) {
+			messageHandler.destroy();
+			messageHandler = null;
+		}
 	}
 
 	public void handleMessage(String rawMessage) {

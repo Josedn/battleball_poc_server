@@ -24,8 +24,8 @@ public class ConnectionManager extends WebSocketServer {
 
 	@Override
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-		this.connectionHandler.handleDisconnect(conn);
 		Logging.writeLine("Closed connection!", LogLevel.DEBUG);
+		this.connectionHandler.handleDisconnect(conn);
 	}
 
 	@Override
@@ -36,15 +36,15 @@ public class ConnectionManager extends WebSocketServer {
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
-		this.connectionHandler.handleMessage(conn, message);
 		Logging.writeLine("Message received from " + conn.hashCode() + "! '" + message + "'", LogLevel.DEBUG);
+		this.connectionHandler.handleMessage(conn, message);
 	}
 
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		connectionCount++;
-		this.connectionHandler.handleStartClient(conn);
 		Logging.writeLine("New connection id: " + conn.hashCode(), LogLevel.DEBUG);
+		this.connectionHandler.handleStartClient(conn);
 	}
 
 	@Override
